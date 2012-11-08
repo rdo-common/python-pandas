@@ -7,8 +7,8 @@
 
 
 Name:           python-pandas
-Version:        0.8.1
-Release:        2%{?dist}
+Version:        0.9.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 08 2012 Kushal Das <kushal@fedoraproject.org> 0.9-1
+- New release of pandas
+
 * Fri Aug 03 2012 Kushal Das <kushal@fedoraproject.org> 0.8.1-2
 - Fixes from review request
 
