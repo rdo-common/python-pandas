@@ -1,4 +1,3 @@
-%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 %{?filter_setup:
 %filter_provides_in %{python_sitearch}.*\.so$
@@ -7,7 +6,7 @@
 
 
 Name:           python-pandas
-Version:        0.9.0
+Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
@@ -15,13 +14,14 @@ Group:          Development/Languages
 License:        BSD
 URL:            http://pandas.pydata.org/
 Source0:        http://pypi.python.org/packages/source/p/pandas/pandas-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python-devel, python-setuptools-devel, python-matplotlib
 Requires:       pytz
 Requires:       python-dateutil
 Requires:       numpy
 Requires:       scipy
+Requires:       python-tables
+Requires:       python-matplotlib
 
 %description
 pandas is an open source, BSD-licensed library providing 
@@ -30,7 +30,6 @@ analysis tools for the Python programming language.
 
 %prep
 %setup -q -n pandas-%{version}
-sed -i -e "s|#!/usr/bin/env python||" pandas/setup.py
 
 
 %build
@@ -38,21 +37,23 @@ sed -i -e "s|#!/usr/bin/env python||" pandas/setup.py
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root,-)
 %doc PKG-INFO README.rst LICENSE
 %{python_sitearch}/pandas*
 
 
 %changelog
+* Mon Dec 24 2012 Kushal Das <kushal@fedoraproject.org> 0.10.0-1
+- New release of pandas 0.10.0
+
+* Thu Nov 08 2012 Kushal Das <kushal@fedoraproject.org> 0.10.0-1
+- New release of pandas 0.10.0
+
 * Thu Nov 08 2012 Kushal Das <kushal@fedoraproject.org> 0.9-1
 - New release of pandas
 
