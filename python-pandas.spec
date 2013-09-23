@@ -1,4 +1,3 @@
-
 %{?filter_setup:
 %filter_provides_in %{python_sitearch}.*\.so$
 %filter_setup
@@ -6,8 +5,8 @@
 
 
 Name:           python-pandas
-Version:        0.10.0
-Release:        3%{?dist}
+Version:        0.12.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -22,6 +21,8 @@ Requires:       numpy
 Requires:       scipy
 Requires:       python-tables
 Requires:       python-matplotlib
+Requires:       python-bottleneck
+Requires:       python-numexpr
 
 %description
 pandas is an open source, BSD-licensed library providing 
@@ -48,6 +49,9 @@ analysis tools for the Python programming language.
 
 
 %changelog
+* Fri Sep 20 2013 Kushal Das <kushal@fedoraproject.org> 0.12.0-1
+- New release of pandas 0.12.0
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.10.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
