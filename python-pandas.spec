@@ -6,7 +6,7 @@
 
 Name:           python-pandas
 Version:        0.12.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -14,7 +14,7 @@ License:        BSD
 URL:            http://pandas.pydata.org/
 Source0:        http://pypi.python.org/packages/source/p/pandas/pandas-%{version}.tar.gz
 
-BuildRequires:  python-devel, python-setuptools-devel, python-matplotlib
+BuildRequires:  python-devel, python-setuptools, python-matplotlib
 Requires:       pytz
 Requires:       python-dateutil
 Requires:       numpy
@@ -49,6 +49,10 @@ analysis tools for the Python programming language.
 
 
 %changelog
+* Fri Dec 06 2013 Pierre-Yves Chibon <pingou@pingoured>fr - 0.12.0-2
+- Change BR from python-setuptools-devel to python-setuptools
+  See https://fedoraproject.org/wiki/Changes/Remove_Python-setuptools-devel
+
 * Fri Sep 20 2013 Kushal Das <kushal@fedoraproject.org> 0.12.0-1
 - New release of pandas 0.12.0
 
