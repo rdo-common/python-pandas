@@ -6,7 +6,7 @@
 
 Name:           python-pandas
 Version:        0.12.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -21,7 +21,7 @@ Requires:       numpy
 Requires:       scipy
 Requires:       python-tables
 Requires:       python-matplotlib
-Requires:       python-bottleneck
+Requires:       python-Bottleneck
 Requires:       python-numexpr
 
 %description
@@ -49,6 +49,9 @@ analysis tools for the Python programming language.
 
 
 %changelog
+* Fri Dec 13 2013 Kushal Das <kushal@fedoraproject.org> 0.12.0-3
+- Fixed dependency name
+
 * Fri Dec 06 2013 Pierre-Yves Chibon <pingou@pingoured>fr - 0.12.0-2
 - Change BR from python-setuptools-devel to python-setuptools
   See https://fedoraproject.org/wiki/Changes/Remove_Python-setuptools-devel
