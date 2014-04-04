@@ -1,12 +1,10 @@
-%{?filter_setup:
-%filter_provides_in %{python_sitearch}.*\.so$
-%filter_setup
-}
+%global with_python3 1
+%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
 
 
 Name:           python-pandas
 Version:        0.12.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -14,7 +12,8 @@ License:        BSD
 URL:            http://pandas.pydata.org/
 Source0:        http://pypi.python.org/packages/source/p/pandas/pandas-%{version}.tar.gz
 
-BuildRequires:  python-devel, python-setuptools, python-matplotlib
+BuildRequires:  python2-devel, python-setuptools, python-matplotlib
+BuildRequires:  Cython
 Requires:       pytz
 Requires:       python-dateutil
 Requires:       numpy
@@ -29,26 +28,74 @@ pandas is an open source, BSD-licensed library providing
 high-performance, easy-to-use data structures and data 
 analysis tools for the Python programming language.
 
+%if 0%{?with_python3}
+%package -n python3-pandas
+Summary:        Python library providing high-performance data analysis tools
+BuildRequires:  python3-devel, python3-setuptools, python3-matplotlib
+BuildRequires:  python3-Cython
+Requires:       python3-pytz
+Requires:       python3-dateutil
+Requires:       python3-numpy
+Requires:       python3-scipy
+Requires:       python3-tables
+Requires:       python3-matplotlib
+Requires:       python3-Bottleneck
+Requires:       python3-numexpr
+
+%description -n python3-pandas
+pandas is an open source, BSD-licensed library providing 
+high-performance, easy-to-use data structures and data 
+analysis tools for the Python programming language.
+
+%endif # with_python3
+
 %prep
 %setup -q -n pandas-%{version}
 
+find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python2}|'
+
+%if 0%{?with_python3}
+rm -rf %{py3dir}
+cp -a . %{py3dir}
+find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
+%endif # with_python3
 
 %build
-%{__python} setup.py build
+CFLAGS=$RPM_OPT_FLAGS %{__python2} setup.py build
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+CFLAGS=$RPM_OPT_FLAGS %{__python3} setup.py build
+popd
+%endif # with_python3
 
 
 %install
-%{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+%if 0%{?with_python3}
+pushd %{py3dir}
+%{__python3} setup.py install --skip-build --root $RPM_BUILD_ROOT
+popd
+%endif # with_python3
 
-
-
+%{__python2} setup.py install --skip-build --root $RPM_BUILD_ROOT
 
 %files
 %doc PKG-INFO README.rst LICENSE
-%{python_sitearch}/pandas*
+%{python2_sitearch}/pandas*
+
+%if 0%{?with_python3}
+%files -n python3-pandas
+%doc PKG-INFO README.rst LICENSE
+%{python3_sitearch}/pandas*
+%endif # with_python3
+
 
 
 %changelog
+* Tue Jan 28 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.12.0-4
+- Enable python3 build
+- Set CFLAGS before build
+
 * Fri Dec 13 2013 Kushal Das <kushal@fedoraproject.org> 0.12.0-3
 - Fixed dependency name
 
