@@ -4,7 +4,7 @@
 
 Name:           python-pandas
 Version:        0.12.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -92,6 +92,9 @@ popd
 
 
 %changelog
+* Wed May 14 2014 Bohuslav Kabrda <bkabrda@redhat.com> - 0.12.0-5
+- Rebuilt for https://fedoraproject.org/wiki/Changes/Python_3.4
+
 * Tue Jan 28 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.12.0-4
 - Enable python3 build
 - Set CFLAGS before build
