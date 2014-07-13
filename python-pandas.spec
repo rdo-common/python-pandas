@@ -3,7 +3,7 @@
 
 
 Name:           python-pandas
-Version:        0.14.0
+Version:        0.14.1
 Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
@@ -92,6 +92,9 @@ popd
 
 
 %changelog
+* Sun Jul 13 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.14.1-1
+- New release of pandas 0.14.1
+
 * Mon Jun 16 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.14.0-1
 - New release of pandas 0.14.0
 
