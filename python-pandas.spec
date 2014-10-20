@@ -3,8 +3,8 @@
 
 
 Name:           python-pandas
-Version:        0.14.1
-Release:        2%{?dist}
+Version:        0.15.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -80,18 +80,21 @@ popd
 %{__python2} setup.py install --skip-build --root $RPM_BUILD_ROOT
 
 %files
-%doc PKG-INFO doc/README.rst LICENSE
+%doc LICENSE RELEASE.md
 %{python2_sitearch}/pandas*
 
 %if 0%{?with_python3}
 %files -n python3-pandas
-%doc PKG-INFO doc/README.rst LICENSE
+%doc LICENSE RELEASE.md
 %{python3_sitearch}/pandas*
 %endif # with_python3
 
 
 
 %changelog
+* Mon Oct 20 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.15.0-1
+- New release of pandas 0.15.0
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.14.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
