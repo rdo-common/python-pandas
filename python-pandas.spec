@@ -4,7 +4,7 @@
 
 Name:           python-pandas
 Version:        0.15.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -15,7 +15,9 @@ Source0:        http://pypi.python.org/packages/source/p/pandas/pandas-%{version
 BuildRequires:  python2-devel, python-setuptools, python-matplotlib
 BuildRequires:  Cython
 Requires:       pytz
-Requires:       python-dateutil
+# Update to dateutil 2.x
+# https://github.com/pydata/pandas/issues/9305
+Requires:       python-dateutil15
 Requires:       numpy
 Requires:       scipy
 Requires:       python-tables
@@ -34,7 +36,7 @@ Summary:        Python library providing high-performance data analysis tools
 BuildRequires:  python3-devel, python3-setuptools, python3-matplotlib
 BuildRequires:  python3-Cython
 Requires:       python3-pytz
-Requires:       python3-dateutil
+Requires:       python3-dateutil15
 Requires:       python3-numpy
 Requires:       python3-scipy
 Requires:       python3-tables
@@ -92,6 +94,9 @@ popd
 
 
 %changelog
+* Mon Jan 19 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.15.2-2
+- Update dependence on dateutil to dateutil15 (bz #1183368)
+
 * Wed Dec 17 2014 Sergio Pascual <sergiopr@fedoraproject.org> - 0.15.2-1
 - New release of pandas 0.15.2
 
