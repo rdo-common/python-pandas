@@ -1,10 +1,9 @@
 %global with_python3 1
-%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
-
+%global pkgname pandas
 
 Name:           python-pandas
-Version:        0.15.2
-Release:        3%{?dist}
+Version:        0.16.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -52,21 +51,27 @@ analysis tools for the Python programming language.
 %endif # with_python3
 
 %prep
-%setup -q -n pandas-%{version}
-
-find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python2}|'
+%setup -qc -n %{pkgname}-%{version}
+mv %{pkgname}-%{version} python2
+pushd python2
+# Common docs
+cp -a LICENSE RELEASE.md ../
+popd
 
 %if 0%{?with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
+cp -a python2 python3
+find python3 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
 %endif # with_python3
 
+find python2 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python2}|'
+
 %build
+pushd python2
 CFLAGS=$RPM_OPT_FLAGS %{__python2} setup.py build
+popd
 
 %if 0%{?with_python3}
-pushd %{py3dir}
+pushd python3
 CFLAGS=$RPM_OPT_FLAGS %{__python3} setup.py build
 popd
 %endif # with_python3
@@ -74,26 +79,35 @@ popd
 
 %install
 %if 0%{?with_python3}
-pushd %{py3dir}
+pushd python3
 %{__python3} setup.py install --skip-build --root $RPM_BUILD_ROOT
 popd
 %endif # with_python3
 
+pushd python2
 %{__python2} setup.py install --skip-build --root $RPM_BUILD_ROOT
+popd
 
 %files
-%doc LICENSE RELEASE.md
+%doc RELEASE.md
+%license LICENSE
 %{python2_sitearch}/pandas*
 
 %if 0%{?with_python3}
 %files -n python3-pandas
-%doc LICENSE RELEASE.md
+%doc RELEASE.md
+%license LICENSE
 %{python3_sitearch}/pandas*
 %endif # with_python3
 
 
 
 %changelog
+* Tue Mar 24 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.16.0-1
+- New release of pandas 0.16.0
+- Use license macro
+- Don't use py3dir (ne python guidelines)
+
 * Tue Jan 20 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.15.2-3
 - Pandas actually supports dateutil 2
 
