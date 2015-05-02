@@ -3,7 +3,7 @@
 
 Name:           python-pandas
 Version:        0.16.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -103,6 +103,9 @@ popd
 
 
 %changelog
+* Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 0.16.0-2
+- Rebuilt for GCC 5 C++11 ABI change
+
 * Tue Mar 24 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.16.0-1
 - New release of pandas 0.16.0
 - Use license macro
