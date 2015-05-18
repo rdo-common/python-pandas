@@ -2,8 +2,8 @@
 %global pkgname pandas
 
 Name:           python-pandas
-Version:        0.16.0
-Release:        2%{?dist}
+Version:        0.16.1
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -103,13 +103,16 @@ popd
 
 
 %changelog
+* Mon May 18 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.16.1-1
+- New release of pandas 0.16.1
+
 * Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 0.16.0-2
 - Rebuilt for GCC 5 C++11 ABI change
 
 * Tue Mar 24 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.16.0-1
 - New release of pandas 0.16.0
 - Use license macro
-- Don't use py3dir (ne python guidelines)
+- Don't use py3dir (new python guidelines)
 
 * Tue Jan 20 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.15.2-3
 - Pandas actually supports dateutil 2
