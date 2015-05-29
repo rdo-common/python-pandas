@@ -1,4 +1,6 @@
+%if 0%{?fedora}
 %global with_python3 1
+%endif
 %global pkgname pandas
 
 Name:           python-pandas
