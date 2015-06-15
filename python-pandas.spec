@@ -4,7 +4,7 @@
 %global pkgname pandas
 
 Name:           python-pandas
-Version:        0.16.1
+Version:        0.16.2
 Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
@@ -103,8 +103,10 @@ popd
 %endif # with_python3
 
 
-
 %changelog
+* Mon Jun 15 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.16.2-1
+- New release of pandas 0.16.2
+
 * Mon May 18 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.16.1-1
 - New release of pandas 0.16.1
 
