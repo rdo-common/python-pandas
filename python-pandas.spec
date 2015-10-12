@@ -4,8 +4,8 @@
 %global pkgname pandas
 
 Name:           python-pandas
-Version:        0.16.2
-Release:        2%{?dist}
+Version:        0.17.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -25,6 +25,7 @@ Requires:       python-tables
 Requires:       python-matplotlib
 Requires:       python-Bottleneck
 Requires:       python-numexpr
+Provides:       python2-%{upname} = %{version}-%{release}
 
 %description
 pandas is an open source, BSD-licensed library providing 
@@ -44,6 +45,7 @@ Requires:       python3-tables
 Requires:       python3-matplotlib
 Requires:       python3-Bottleneck
 Requires:       python3-numexpr
+Provides:       python3-%{upname} = %{version}-%{release}
 
 %description -n python3-pandas
 pandas is an open source, BSD-licensed library providing 
@@ -104,6 +106,9 @@ popd
 
 
 %changelog
+* Mon Oct 12 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.17.0-1
+- New release of pandas 0.17.0
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.16.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
