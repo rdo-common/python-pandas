@@ -5,7 +5,7 @@
 
 Name:           python-pandas
 Version:        0.17.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -25,7 +25,9 @@ Requires:       python-tables
 Requires:       python-matplotlib
 Requires:       python-Bottleneck
 Requires:       python-numexpr
-Provides:       python2-%{upname} = %{version}-%{release}
+Provides:       python2-%{pkgname} = %{version}-%{release}
+
+%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
 
 %description
 pandas is an open source, BSD-licensed library providing 
@@ -45,7 +47,6 @@ Requires:       python3-tables
 Requires:       python3-matplotlib
 Requires:       python3-Bottleneck
 Requires:       python3-numexpr
-Provides:       python3-%{upname} = %{version}-%{release}
 
 %description -n python3-pandas
 pandas is an open source, BSD-licensed library providing 
@@ -55,42 +56,22 @@ analysis tools for the Python programming language.
 %endif # with_python3
 
 %prep
-%setup -qc -n %{pkgname}-%{version}
-mv %{pkgname}-%{version} python2
-pushd python2
-# Common docs
-cp -a LICENSE RELEASE.md ../
-popd
-
-%if 0%{?with_python3}
-cp -a python2 python3
-find python3 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-%endif # with_python3
-
-find python2 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python2}|'
+%setup -q -n %{pkgname}-%{version}
 
 %build
-pushd python2
-CFLAGS=$RPM_OPT_FLAGS %{__python2} setup.py build
-popd
+%py2_build
 
 %if 0%{?with_python3}
-pushd python3
-CFLAGS=$RPM_OPT_FLAGS %{__python3} setup.py build
-popd
+%py3_build
 %endif # with_python3
 
 
 %install
 %if 0%{?with_python3}
-pushd python3
-%{__python3} setup.py install --skip-build --root $RPM_BUILD_ROOT
-popd
+%py3_install
 %endif # with_python3
 
-pushd python2
-%{__python2} setup.py install --skip-build --root $RPM_BUILD_ROOT
-popd
+%py2_install
 
 %files
 %doc RELEASE.md
@@ -106,6 +87,11 @@ popd
 
 
 %changelog
+* Wed Oct 28 2015 Orion Poplawski <orion@cora.nwra.com> - 0.17.0-2
+- Use common build directory, new python macros
+- Filter provides
+- Fix provides
+
 * Mon Oct 12 2015 Sergio Pascual <sergiopr@fedoraproject.org> - 0.17.0-1
 - New release of pandas 0.17.0
 
