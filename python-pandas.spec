@@ -5,7 +5,7 @@
 
 Name:           python-pandas
 Version:        0.17.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -87,6 +87,9 @@ analysis tools for the Python programming language.
 
 
 %changelog
+* Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.17.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
+
 * Wed Oct 28 2015 Orion Poplawski <orion@cora.nwra.com> - 0.17.0-2
 - Use common build directory, new python macros
 - Filter provides
