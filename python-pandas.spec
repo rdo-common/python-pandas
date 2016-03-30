@@ -1,11 +1,11 @@
 %if 0%{?fedora}
 %global with_python3 1
 %endif
-%global pkgname pandas
+%global srcname pandas
 
 Name:           python-pandas
-Version:        0.17.1
-Release:        2%{?dist}
+Version:        0.18.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 Group:          Development/Languages
@@ -28,7 +28,8 @@ Requires:       python-numexpr
 %if 0%{?fedora}
 Recommends:     python-xlrd, python-xlwt
 %endif
-Provides:       python2-%{pkgname} = %{version}-%{release}
+
+%{?python_provide:%python_provide python2-%{srcname}}
 
 %global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
 
@@ -51,10 +52,11 @@ Requires:       python3-matplotlib
 Requires:       python3-Bottleneck
 Requires:       python3-numexpr
 %if 0%{?fedora}
-# python3-xlwt doesn't exist: bz #1282235
-# openpyxl version is higher than 2.0
 Recommends:     python3-xlrd
+Recommends:     python3-xlwt
 %endif
+
+%{?python_provide:%python_provide python3-%{srcname}}
 
 %description -n python3-pandas
 pandas is an open source, BSD-licensed library providing 
@@ -64,7 +66,7 @@ analysis tools for the Python programming language.
 %endif # with_python3
 
 %prep
-%setup -q -n %{pkgname}-%{version}
+%setup -q -n %{srcname}-%{version}
 
 %build
 %py2_build
@@ -95,6 +97,9 @@ analysis tools for the Python programming language.
 
 
 %changelog
+* Wed Mar 30 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.18.0-1
+- New upstream version (0.18.0)
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.17.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
