@@ -1,47 +1,61 @@
-%if 0%{?fedora}
-%global with_python3 1
-%endif
 %global srcname pandas
 
-Name:           python-pandas
-Version:        0.18.0
-Release:        1%{?dist}
-Summary:        Python library providing high-performance data analysis tools
-
-Group:          Development/Languages
-License:        BSD
-URL:            http://pandas.pydata.org/
-Source0:        http://pypi.python.org/packages/source/p/pandas/pandas-%{version}.tar.gz
-
-BuildRequires:  python2-devel, python-setuptools, python-matplotlib
-BuildRequires:  Cython
-Requires:       pytz
-# pandas actually supports datautil 2
-# https://github.com/pydata/pandas/issues/9305
-Requires:       python-dateutil
-Requires:       numpy
-Requires:       scipy
-Requires:       python-tables
-Requires:       python-matplotlib
-Requires:       python-Bottleneck
-Requires:       python-numexpr
 %if 0%{?fedora}
-Recommends:     python-xlrd, python-xlwt
+%bcond_without python3
+%else
+%bcond_with python3
 %endif
 
-%{?python_provide:%python_provide python2-%{srcname}}
+Name:           python-%{srcname}
+Version:        0.18.0
+Release:        2%{?dist}
+Summary:        Python library providing high-performance data analysis tools
+
+License:        BSD
+URL:            http://pandas.pydata.org/
+Source0:        http://pypi.python.org/packages/source/p/pandas/%{srcname}-%{version}.tar.gz
 
 %global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
 
 %description
-pandas is an open source, BSD-licensed library providing 
-high-performance, easy-to-use data structures and data 
+pandas is an open source, BSD-licensed library providing
+high-performance, easy-to-use data structures and data
 analysis tools for the Python programming language.
 
-%if 0%{?with_python3}
-%package -n python3-pandas
+%package -n python2-%{srcname}
 Summary:        Python library providing high-performance data analysis tools
-BuildRequires:  python3-devel, python3-setuptools, python3-matplotlib
+BuildRequires:  python2-devel
+BuildRequires:  python2-setuptools
+BuildRequires:  python2-matplotlib
+BuildRequires:  python2-Cython
+Requires:       python2-pytz
+Requires:       python2-dateutil
+Requires:       python2-numpy
+Requires:       python2-scipy
+Requires:       python2-tables
+Requires:       python2-matplotlib
+Requires:       python2-Bottleneck
+Requires:       python2-numexpr
+%if 0%{?fedora}
+Recommends:     python2-xlrd
+Recommends:     python2-xlwt
+%endif
+
+%{?python_provide:%python_provide python2-%{srcname}}
+
+%description -n python2-%{srcname}
+pandas is an open source, BSD-licensed library providing
+high-performance, easy-to-use data structures and data
+analysis tools for the Python programming language.
+
+Python 2 version.
+
+%if 0%{?with_python3}
+%package -n python3-%{srcname}
+Summary:        Python library providing high-performance data analysis tools
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-matplotlib
 BuildRequires:  python3-Cython
 Requires:       python3-pytz
 Requires:       python3-dateutil
@@ -58,15 +72,16 @@ Recommends:     python3-xlwt
 
 %{?python_provide:%python_provide python3-%{srcname}}
 
-%description -n python3-pandas
-pandas is an open source, BSD-licensed library providing 
-high-performance, easy-to-use data structures and data 
+%description -n python3-%{srcname}
+pandas is an open source, BSD-licensed library providing
+high-performance, easy-to-use data structures and data
 analysis tools for the Python programming language.
 
+Python 3 version.
 %endif # with_python3
 
 %prep
-%setup -q -n %{srcname}-%{version}
+%autosetup -n %{srcname}-%{version}
 
 %build
 %py2_build
@@ -75,28 +90,29 @@ analysis tools for the Python programming language.
 %py3_build
 %endif # with_python3
 
-
 %install
+%py2_install
+
 %if 0%{?with_python3}
 %py3_install
 %endif # with_python3
 
-%py2_install
-
-%files
+%files -n python2-%{srcname}
 %doc RELEASE.md
 %license LICENSE
-%{python2_sitearch}/pandas*
+%{python2_sitearch}/%{srcname}*
 
 %if 0%{?with_python3}
 %files -n python3-pandas
 %doc RELEASE.md
 %license LICENSE
-%{python3_sitearch}/pandas*
+%{python3_sitearch}/%{srcname}*
 %endif # with_python3
 
-
 %changelog
+* Sat Apr 09 2016 Igor Gnatenko <ignatenko@redhat.com> - 0.18.0-2
+- Fix python_provide macros usage (FTBFS for some packages)
+
 * Wed Mar 30 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.18.0-1
 - New upstream version (0.18.0)
 
