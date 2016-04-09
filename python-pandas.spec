@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.18.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 License:        BSD
@@ -32,7 +32,8 @@ Requires:       python2-pytz
 Requires:       python2-dateutil
 Requires:       python2-numpy
 Requires:       python2-scipy
-Requires:       python2-tables
+# TODO: fix that package to provide python2-tables
+Requires:       python-tables
 Requires:       python2-matplotlib
 Requires:       python2-Bottleneck
 Requires:       python2-numexpr
@@ -110,6 +111,9 @@ Python 3 version.
 %endif # with_python3
 
 %changelog
+* Sat Apr 09 2016 Igor Gnatenko <ignatenko@redhat.com> - 0.18.0-3
+- Fix broken deps
+
 * Sat Apr 09 2016 Igor Gnatenko <ignatenko@redhat.com> - 0.18.0-2
 - Fix python_provide macros usage (FTBFS for some packages)
 
