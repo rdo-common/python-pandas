@@ -7,13 +7,13 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        0.18.0
-Release:        3%{?dist}
+Version:        0.18.1
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 License:        BSD
 URL:            http://pandas.pydata.org/
-Source0:        http://pypi.python.org/packages/source/p/pandas/%{srcname}-%{version}.tar.gz
+Source0:        https://pypi.io/packages/source/p/pandas/%{srcname}-%{version}.tar.gz
 
 %global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
 
@@ -111,6 +111,10 @@ Python 3 version.
 %endif # with_python3
 
 %changelog
+* Wed Jul 13 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.18.1-1
+- New upstream version (0.18.1)
+- Update pypi url
+
 * Sat Apr 09 2016 Igor Gnatenko <ignatenko@redhat.com> - 0.18.0-3
 - Fix broken deps
 
