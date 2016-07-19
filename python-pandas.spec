@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.18.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 License:        BSD
@@ -111,6 +111,9 @@ Python 3 version.
 %endif # with_python3
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.18.1-2
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Wed Jul 13 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.18.1-1
 - New upstream version (0.18.1)
 - Update pypi url
