@@ -7,8 +7,8 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        0.18.1
-Release:        3%{?dist}
+Version:        0.19.0
+Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
 License:        BSD
@@ -33,11 +33,12 @@ Requires:       python2-dateutil
 Requires:       python2-numpy
 Requires:       python2-scipy
 # TODO: fix that package to provide python2-tables
-Requires:       python-tables
+Requires:       python2-tables
 Requires:       python2-matplotlib
 Requires:       python2-Bottleneck
 Requires:       python2-numexpr
 %if 0%{?fedora}
+Recommends:     python2-pandas-datareader
 Recommends:     python2-xlrd
 Recommends:     python2-xlwt
 %endif
@@ -67,6 +68,7 @@ Requires:       python3-matplotlib
 Requires:       python3-Bottleneck
 Requires:       python3-numexpr
 %if 0%{?fedora}
+Recommends:     python3-pandas-datareader
 Recommends:     python3-xlrd
 Recommends:     python3-xlwt
 %endif
@@ -111,6 +113,10 @@ Python 3 version.
 %endif # with_python3
 
 %changelog
+* Wed Oct 19 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.19.0-1
+- New upstream version (0.19.0)
+- Brings pandas-datareader using recommends
+
 * Sat Oct 15 2016 Peter Robinson <pbrobinson@fedoraproject.org> - 0.18.1-3
 - rebuilt for matplotlib-2.0.0
 
