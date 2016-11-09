@@ -7,7 +7,7 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        0.19.0
+Version:        0.19.1
 Release:        1%{?dist}
 Summary:        Python library providing high-performance data analysis tools
 
@@ -113,6 +113,9 @@ Python 3 version.
 %endif # with_python3
 
 %changelog
+* Wed Nov 09 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.19.1-1
+- New upstream version (0.19.1)
+
 * Wed Oct 19 2016 Sergio Pascual <sergiopr@fedoraproject.org> - 0.19.0-1
 - New upstream version (0.19.0)
 - Brings pandas-datareader using recommends
