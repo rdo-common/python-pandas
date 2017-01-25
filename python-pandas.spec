@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.19.1
-Release:        2%{?dist}
+Release:        2%{?dist}.2
 Summary:        Python library providing high-performance data analysis tools
 
 License:        BSD
@@ -28,14 +28,14 @@ BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-matplotlib
 BuildRequires:  python2-Cython
-Requires:       python2-pytz
-Requires:       python2-dateutil
+Requires:       pytz
+Requires:       python-dateutil
 Requires:       python2-numpy
 Requires:       python2-scipy
 # TODO: fix that package to provide python2-tables
-Requires:       python2-tables
+Requires:       python-tables
 Requires:       python2-matplotlib
-Requires:       python2-Bottleneck
+Requires:       python-Bottleneck
 Requires:       python2-numexpr
 %if 0%{?fedora}
 Recommends:     python2-pandas-datareader
